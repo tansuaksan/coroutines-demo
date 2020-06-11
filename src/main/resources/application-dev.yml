@@ -1,0 +1,9 @@
+logging:
+  level:
+    org.springframework.data.r2dbc: DEBUG
+
+spring:
+  r2dbc:
+    url: r2dbc:mariadb://localhost:3306/demo?useSSL=false
+    username: root
+    password: root
