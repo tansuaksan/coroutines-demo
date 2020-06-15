@@ -1,7 +1,7 @@
 import org.jetbrains.kotlin.gradle.tasks.KotlinCompile
 
 plugins {
-    id("org.springframework.boot") version "2.3.0.RELEASE"
+    id("org.springframework.boot") version "2.3.1.RELEASE"
     id("io.spring.dependency-management") version "1.0.9.RELEASE"
     kotlin("jvm") version "1.3.72"
     kotlin("plugin.spring") version "1.3.72"
@@ -17,6 +17,7 @@ repositories {
 
 dependencies {
     implementation("org.springframework.boot:spring-boot-starter-actuator")
+    implementation("org.springframework.boot:spring-boot-starter-data-mongodb-reactive")
     implementation("org.springframework.boot:spring-boot-starter-data-r2dbc")
     implementation("org.mariadb:r2dbc-mariadb:0.8.2-alpha2")
     implementation("org.springframework.boot:spring-boot-starter-webflux")

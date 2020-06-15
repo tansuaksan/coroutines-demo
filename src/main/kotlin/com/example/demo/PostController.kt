@@ -2,22 +2,23 @@ package com.example.demo
 
 import kotlinx.coroutines.flow.Flow
 import org.springframework.web.bind.annotation.*
+import java.lang.RuntimeException
 
 @RestController
 @RequestMapping("/posts")
-class PostController(private val postRepository: PostRepository,
-private val reactivePostRepository: ReactivePostRepository) {
+class PostController(private val postClientRepository: PostClientRepository,
+                     private val mongoPostRepository: MongoPostRepository) {
 
     @GetMapping
     fun findAll(): Flow<Post> =
-            postRepository.findAll()
+            postClientRepository.findAll()
 
     @GetMapping("{id}")
-    suspend fun findOne(@PathVariable id: Long): Post? =
-            reactivePostRepository.findById(id) ?: throw RuntimeException(id.toString())
+    suspend fun findOne(@PathVariable id: Long): MongoPost? =
+            mongoPostRepository.findById(id) ?: throw RuntimeException()
 
     @PostMapping
-    suspend fun save(@RequestBody post: Post) =
-            postRepository.save(post)
+    suspend fun save(@RequestBody mongoPost: MongoPost) =
+            mongoPostRepository.save(mongoPost)
 
 }

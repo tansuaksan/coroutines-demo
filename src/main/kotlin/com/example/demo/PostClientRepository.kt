@@ -7,23 +7,23 @@ import org.springframework.data.r2dbc.core.*
 import org.springframework.stereotype.Component
 
 @Component
-class PostRepository(private val client: DatabaseClient) {
+class PostClientRepository(private val client: DatabaseClient) {
 
     suspend fun count(): Long =
-            client.execute("SELECT COUNT(*) FROM posts")
+            client.execute("SELECT COUNT(*) FROM post")
                     .asType<Long>().fetch().awaitOne()
 
     fun findAll(): Flow<Post> =
-            client.select().from("posts").asType<Post>().fetch().all().asFlow()
+            client.select().from("post").asType<Post>().fetch().all().asFlow()
 
     suspend fun findOne(id: Long): Post? =
-            client.execute("SELECT * FROM posts WHERE id = \$1")
+            client.execute("SELECT * FROM post WHERE id = \$1")
                     .bind(0, id).asType<Post>()
                     .fetch()
                     .awaitOneOrNull()
 
     suspend fun deleteAll() =
-            client.execute("DELETE FROM posts")
+            client.execute("DELETE FROM post")
                     .fetch()
                     .rowsUpdated()
                     .awaitSingle()
@@ -31,7 +31,7 @@ class PostRepository(private val client: DatabaseClient) {
     suspend fun save(post: Post) =
             client.insert()
                     .into<Post>()
-                    .table("posts")
+                    .table("post")
                     .using(post)
                     .await()
 
