@@ -2,7 +2,6 @@ package com.example.demo
 
 import kotlinx.coroutines.flow.Flow
 import org.springframework.web.bind.annotation.*
-import java.lang.RuntimeException
 
 @RestController
 @RequestMapping("/posts")

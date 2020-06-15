@@ -22,7 +22,7 @@ class PostClientRepository(private val client: DatabaseClient) {
                     .fetch()
                     .awaitOneOrNull()
 
-    suspend fun deleteAll() =
+    suspend fun deleteAll(): Int =
             client.execute("DELETE FROM post")
                     .fetch()
                     .rowsUpdated()
