@@ -1,1 +1,1 @@
-# coroutines-demo
+# Spring Boot Kotlin Coroutines demo application
